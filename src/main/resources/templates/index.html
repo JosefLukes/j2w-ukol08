@@ -8,5 +8,24 @@
 </head>
 <body>
     <h1>Tady bude můj blog…</h1>
+
+    <table class="u-full-width">
+        <thead>
+        <tr>
+            <th>Jméno</th>
+            <th>Příjmení</th>
+            <th>Datum narození</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="post: ${posts}">
+            <td th:text="${post.author}">Jan</td>
+            <td th:text="${post.title}">Hus</td>
+            <td th:text="${post.perex}">Hus</td>
+            <td th:utext="${post.body}">Hus</td>
+            <td th:text="${#temporals.format(post.published, 'd. MMMM yyyy')}">1370</td>
+        </tr>
+        </tbody>
+    </table>
 </body>
 </html>
