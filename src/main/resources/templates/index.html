@@ -7,28 +7,37 @@
     <link rel="icon" type="image/png" href="/images/favicon.png">
 </head>
 <body>
-    <h1>Tady bude můj blog…</h1>
+<h1>Tady bude můj blog…</h1>
 
-    <table class="u-full-width">
-        <thead>
-        <tr>
+<table class="u-full-width">
+    <thead>
+    <div class="pager">
+
+        <span th:if="${page.hasPrevious()}">
+            <a th:href="@{/(page=${page.number-1},size=${page.size})}">Přechozí</a>
+        </span>
+
+        <span th:if="${page.hasNext()}">
+            <a th:href="@{/(page=${page.number+1},size=${page.size})}">Další</a>
+        </span>
+
+    </div>
+         <tr>
             <th>Autor</th>
             <th>Titulek</th>
             <th>Perex</th>
             <th>Článek</th>
             <th>Datum přidání</th>
         </tr>
-        </thead>
-        <tbody>
-        <tr th:each="post: ${posts}">
-            <td th:text="${post.author}">Jan</td>
-            <td th:text="${post.title}">Hus</td>
-            <td th:text="${post.perex}">Hus</td>
-            <td th:utext="${post.body}">Hus</td>
-            <td th:text="${#temporals.format(post.published, 'd. MMMM yyyy')}">1370</td>
-            <td><a th:href="@{'/' + ${post.slug}}"> Zobrazit</a> </td>
-        </tr>
-        </tbody>
-    </table>
+    </thead>
+    <tr th:each="post: ${posts}">
+        <th th:text="${post.author}">Jan</th>
+        <th th:text="${post.title}">Hus</th>
+        <th th:text="${post.perex}">Hus</th>
+        <th th:utext="${post.body}">Hus</th>
+        <th th:text="${#temporals.format(post.published, 'd. MMMM yyyy')}">1370</th>
+        <th><a th:href="@{'/' + ${post.slug}}"> Zobrazit</a></th>
+    </tr>
+</table>
 </body>
 </html>

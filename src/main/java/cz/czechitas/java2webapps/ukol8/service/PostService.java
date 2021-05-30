@@ -8,6 +8,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 @Service
 public class PostService {
 
@@ -19,17 +21,18 @@ public class PostService {
     }
 
     public Page<Post> list(Pageable pageable) {
-        pageable = PageRequest.of(0, 20);
+
         return postRepository.findAll(pageable);
     }
 
     public Page<Post> singlePost(String slug, Pageable pageable) {
-        pageable = PageRequest.of(0, 20);
+
         return postRepository.jedenPost(slug, pageable);
     }
 
-    public Page<Post> list2(Pageable pageable) {
+    public Page<Post> listOlder(Pageable pageable) {
         pageable = PageRequest.of(0, 20);
-        return postRepository.findByPublishedBefore(pageable);
+        LocalDate todayDate = LocalDate.now();
+        return postRepository.findByPublishedBeforeAndPublishedIsNotNullOrderByPublishedDesc(todayDate, pageable);
     }
 }
